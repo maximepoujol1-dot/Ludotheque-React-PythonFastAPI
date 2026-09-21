@@ -7,6 +7,7 @@ import HomePage from "./view/HomePage"
 import CollectionPage from "./view/CollectionPage"
 import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
+import RegisterPage from "./view/RegisterPage"
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/collection" element={<CollectionPage/>}/>
         <Route path="/account" element={<AccountPage/>}/>
         <Route path="/login" element={<LoginPage/>}/>
+        <Route path="/register" element={<RegisterPage/>}/>
         <Route path="*" element={<NotFoundPage/>}/>
       </Routes>
       <Footer/>
