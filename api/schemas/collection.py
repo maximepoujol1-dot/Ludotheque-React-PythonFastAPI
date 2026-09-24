@@ -3,7 +3,8 @@ from .items import Item
 from datetime import date
 from typing import Literal
 
-class CollectionGame(BaseModel):
+class CollectionEntry(BaseModel):
+    id : int
     item : Item
     statut: Literal["a_decouvrir" , "en_cours" , "termine"] 
     date: date

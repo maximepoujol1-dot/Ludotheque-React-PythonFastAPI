@@ -1,0 +1,10 @@
+liste des lib requisent par ce projet :
+
+- fastapi
+- uvicorn[standard]
+- sqlalchemy
+- psycopg2-binary
+- python-dotenv
+- PyJWT
+- pwdlib[argon2]
+- python-multipart
