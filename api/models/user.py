@@ -1,13 +1,16 @@
-from typing import TYPE_CHECKING, List
 from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from .collection import Collection 
-from ..core.config import Base
+from ..db.session import Base
+from typing import TYPE_CHECKING, List
+
+if TYPE_CHECKING:
+    from .collection import Collection
+
 
 #user table
 class Users(Base):
     __tablename__ = "users"
-    uuid: Mapped[str] = mapped_column(primary_key=True)
+    id: Mapped[int] = mapped_column(primary_key=True)
     username: Mapped[str] 
     fullname: Mapped[str]
     password: Mapped[str] 
@@ -15,7 +18,7 @@ class Users(Base):
 
     collections: Mapped[List["Collection"]] = relationship(
     "Collection",
-    back_populates="user"
+    back_populates="user",
 )
 
 

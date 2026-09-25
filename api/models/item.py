@@ -1,7 +1,10 @@
 from sqlalchemy import ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from .collection import Collection
-from ..core.config import Base
+from ..db.session import Base
+from typing import TYPE_CHECKING, List
+
+if TYPE_CHECKING:
+    from .collection import Collection
 
 class Items(Base):
     __tablename__ = "items"
