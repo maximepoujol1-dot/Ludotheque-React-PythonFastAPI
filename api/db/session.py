@@ -1,7 +1,8 @@
-from sqlalchemy.orm import create_engine, sessionmaker, DeclarativeBase
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, DeclarativeBase
 from ..core.config import DATABASE_URL
 
-engine = create_engine(DATABASE_URL, connect_args={"check_same_thread":False},)
+engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 class Base(DeclarativeBase):
@@ -13,3 +14,6 @@ def get_db():
     yield db
   finally:
     db.close()
+
+def create_table():
+  Base.metadata.create_all(engine)        
