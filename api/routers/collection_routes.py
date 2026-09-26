@@ -1,5 +1,7 @@
-from fastapi import APIRouter
-from ..schemas.collection import collectionEntry
+from fastapi import APIRouter, Depends,  HTTPException
+from sqlalchemy.ext.asyncio import AsyncSession
+from ..db.session import get_db
+from ..schemas.collection import CollectionEntry
 from ..services.collection_services import (
     create_collectionEntry ,
     delete_collectionEntry ,
@@ -9,33 +11,37 @@ from ..services.collection_services import (
     get_stats
 )
 
-router = APIRouter(prefix="/collection", tags=["collection"])
+router = APIRouter(prefix="/me/collection", tags=["collection"])
 
-@router.get("/me/collection", response_model=list[collectionEntry])
-def list_collection():
-    collection = get_collection()
+@router.get("/", response_model=list[CollectionEntry], status_code.status.HTTP_200_OK)
+async def list_collection(db : AsyncSession = Depends(get_db)):
+    collection = await get_collection(db)
     return collection
 
-@router.post("/me/collection", response_model=collectionEntry)
-def add_collection():
-    entry = create_collectionEntry()
+@router.post("/", response_model=CollectionEntry, status_code.status.HTTP_201_CREATED)
+async def add_collection(elt: CollectionEntry, db: AsyncSession = Depends(get_db)):
+    entry = await create_collectionEntry(elt,db)
+    if entry is None :
+        raise HTTPException(status_code=404, detail=f"entry introuvable")
+    if entry == 0:
+        raise HTTPException(status_code=409, detail=f"entry deja présente")
     return entry
 
-@router.put("/me/collection/{entry_id}",response_model=collectionEntry)
-def edit_collectionEntry(entry_id:int):
-    updated = update_collectionEntry()
-    if updated is None 
+@router.patch("/{entry_id}",response_model=CollectionEntry, status_code.status.HTTP_200_OK)
+async def edit_collectionEntry(entry_id: int, newEntry: CollectionEntry, db: AsyncSession = Depends(get_db)):
+    updated = await update_collectionEntry(entry_id, newEntry, db)
+    if updated is None :
         raise HTTPException(status_code=404, detail=f"entry {entry_id} introuvable") 
-    return updated   
+    return newEntry   
 
-@router.delete("/me/collection/{entry_id}",response_model=collectionEntry)
-def delete_collectionEntry(entry_id:int):
-    deleted = delete_collectionEntry
-    if deleted is None 
+@router.delete("/{entry_id}",response_model=CollectionEntry, status_code.status.HTTP_204_NO_CONTENT)
+async def delete_collection(entry_id:int, db : AsyncSession = Depends(get_db)):
+    deleted = await delete_collectionEntry(entry_id, db)
+    if deleted is None :
         raise HTTPException(status_code=404, detail=f"entry {entry_id} introuvable") 
-    return delete    
+    return  
 
-@router.get("/me/stats")
-def collection_stats():
-    stat = get_stats()
-    return
+@router.get("/stats",{total, par_statut:{}, note_moyenne}, status_code.status.HTTP_200_OK) 
+async def collection_stats(db : AsyncSession = Depends(get_db)):
+    stat = await get_stats(db)
+    return stat

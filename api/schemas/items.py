@@ -10,3 +10,10 @@ class Items(BaseModel):
     annee: int
 
     model_config = {"from_attributes": True}
+
+
+class ItemsPage(BaseModel):
+    total: int
+    page: int
+    limit: int
+    results: list[Items]

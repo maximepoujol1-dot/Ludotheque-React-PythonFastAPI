@@ -7,4 +7,5 @@ async def find_item_by_id(item_id : int, db: AsyncSession):
 
 async def get_all_item(db: AsyncSession):
     statement = select(Items)
-    return list(await db.scalars(statement).all())
+    result = list(await db.scalars(statement).all())
+    return {total,page,limit,results}
