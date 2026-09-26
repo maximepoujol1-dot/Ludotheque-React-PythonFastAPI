@@ -1,9 +1,9 @@
 fastapi
 uvicorn[standard]
 sqlalchemy
-psycopg2-binary
+aiosqlite
 python-dotenv
 PyJWT
-pwdlib[argon2]
+passlib[bcrypt]
 python-multipart
 email-validator
