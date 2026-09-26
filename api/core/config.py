@@ -1,11 +1,17 @@
-import os
-from dotenv import load_dotenv
+from pathlib import Path
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
-load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
+class Settings(BaseSettings):
+    DATABASE_URL: str
+    SECRET_KEY: str
+    ALGORITHM: str
+    ACCESS_TOKEN_EXPIRE_MINUTES: int
+    CORS_ORIGINS: list[str]
 
-DATABASE_URL = os.environ.get("DATABASE_URL")
-SECRET_KEY = os.environ.get("SECRET_KEY")
-ALGORITHM = os.environ.get("ALGORITHM")
-ACCESS_TOKEN_EXPIRE_MINUTES = os.environ.get("ACCESS_TOKEN_EXPIRE_MINUTES")
-CORS_ORIGINS = os.environ.get("CORS_ORIGINS")
+    model_config = SettingsConfigDict(
+        env_file=Path(__file__).resolve().parents[1] / ".env",
+        env_file_encoding="utf-8",
+    )
+
+settings = Settings()
 

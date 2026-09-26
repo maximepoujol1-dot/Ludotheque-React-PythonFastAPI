@@ -1,9 +1,11 @@
 fastapi
 uvicorn[standard]
 sqlalchemy
-aiosqlite
+asyncpg
+pydantic-settings
 python-dotenv
 PyJWT
 passlib[bcrypt]
 python-multipart
 email-validator
+pydantic-settings
