@@ -1,13 +1,15 @@
 from pydantic import BaseModel
-from .items import Item
+from .items import Items
 from datetime import date
 from typing import Literal
 
 class CollectionEntry(BaseModel):
-    id : int
-    item : Item
+    collection_id : int
+    item : Items
     statut: Literal["a_decouvrir" , "en_cours" , "termine"] 
     date: date
     categorie : Literal["fps" , "rpg" , "rts","gestion"]
-    note: float | None
-    commentaire: str | None
+    note: float | None = None
+    commentaire: str | None = None
+
+    model_config = {"from_attributes": True}

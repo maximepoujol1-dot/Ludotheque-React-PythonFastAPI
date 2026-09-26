@@ -22,5 +22,5 @@ class Collection(Base):
     note: Mapped[float]
     commentaire: Mapped[str]
 
-    user: Mapped["User"] = relationship("Users", back_populates="collection")
+    user: Mapped["Users"] = relationship("Users", back_populates="collection")
     item: Mapped["Items"] = relationship("Items", back_populates="collection")

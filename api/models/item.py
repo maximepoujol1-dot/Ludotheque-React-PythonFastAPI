@@ -8,12 +8,12 @@ if TYPE_CHECKING:
 
 class Items(Base):
     __tablename__ = "items"
-    item_id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str] 
+    item_id: Mapped[int] = mapped_column(primary_key=True, index=True)
+    name: Mapped[str] = mapped_column(String(255), unique=True, nullable=False)
     categorie: Mapped[str] 
     description: Mapped[str] 
     image: Mapped[str] 
-    annee: Mapped[str] 
+    annee: Mapped[int] 
      
-    collections: Mapped[List["Collection"]] = relationship("Collection", back_populates="item")
+    collection: Mapped[List["Collection"]] = relationship("Collection", back_populates="item")
 

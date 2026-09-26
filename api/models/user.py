@@ -13,13 +13,11 @@ class Users(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     username: Mapped[str] 
     fullname: Mapped[str]
-    password: Mapped[str] 
-    email: Mapped[str]
+    password_hash: Mapped[str] 
+    email: Mapped[str] = mapped_column(String(255), unique=True, nullable=False)
+    disabled: Mapped[bool]
 
-    collections: Mapped[List["Collection"]] = relationship(
-    "Collection",
-    back_populates="user",
-)
+    collection: Mapped[List["Collection"]] = relationship("Collection", back_populates="user")
 
 
     

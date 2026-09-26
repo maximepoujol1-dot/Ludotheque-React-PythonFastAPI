@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from typing import Literal
 
-class Item(BaseModel):
+class Items(BaseModel):
     item_id: int
     name: str
     categorie: Literal["fps" , "rpg" , "rts","gestion"]
@@ -9,5 +9,4 @@ class Item(BaseModel):
     image: str
     annee: int
 
-class Items(BaseModel):
-    listItems : list[Item] = []
+    model_config = {"from_attributes": True}
