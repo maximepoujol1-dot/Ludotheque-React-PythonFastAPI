@@ -3,16 +3,16 @@ from typing import Literal
 
 class Items(BaseModel):
     item_id: int
-    name: str
+    titre: str
     categorie: Literal["fps" , "rpg" , "rts","gestion"]
     description: str
-    image: str
+    image_url: str
     annee: int
 
     model_config = {"from_attributes": True}
 
 
-class ItemsPage(BaseModel):
+class ItemsList(BaseModel):
     total: int
     page: int
     limit: int

@@ -15,7 +15,7 @@ class Users(Base):
     fullname: Mapped[str]
     password_hash: Mapped[str] 
     email: Mapped[str] = mapped_column(String(255), unique=True, nullable=False)
-    disabled: Mapped[bool]
+    disabled: Mapped[bool] = mapped_column(default=False, nullable=False)
 
     collection: Mapped[List["Collection"]] = relationship("Collection", back_populates="user")
 
