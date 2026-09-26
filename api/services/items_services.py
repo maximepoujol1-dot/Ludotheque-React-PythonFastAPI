@@ -1,5 +1,10 @@
-def find_item_by_id(id : int):
-    return
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
+from ..models.item import Items
 
-def get_all_item(game: str | None = None):
-    return
+async def find_item_by_id(item_id : int, db: AsyncSession):
+    return await db.get(Items,item_id)
+
+async def get_all_item(db: AsyncSession):
+    statement = select(Items)
+    return list(await db.scalars(statement).all())
