@@ -1,10 +1,8 @@
 from .config import settings
 from datetime import datetime, timedelta, timezone
-from typing import Annotated
 import jwt
-from fastapi import Depends, FastAPI, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-from jwt.exceptions import InvalidTokenError
+from fastapi import Depends,
+from fastapi.security import OAuth2PasswordBearer
 from passlib.context import CryptContext
 from pydantic import BaseModel
 
@@ -13,12 +11,12 @@ class Token(BaseModel):
     token_type: str
 
 class TokenData(BaseModel):
-    username : str | None = None
+    email: str | None = None
 
 password_hash = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 DUMMY_HASH = password_hash.hash("dummypassword")
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
 def get_password_hashed(password : str):
     return password_hash.hash(password)
