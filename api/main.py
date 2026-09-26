@@ -10,8 +10,10 @@ from contextlib import asynccontextmanager
 @asynccontextmanager
 async def lifespan(app : FastAPI):
     print("created")
-    create_table()
+    await create_table()
     yield
+    print("close")
+    await engine.dispose()
 
 app = FastAPI(lifespan=lifespan)
 
@@ -20,11 +22,4 @@ app.include_router(items_routes.router)
 app.include_router(collection_routes.router)
 app.include_router(errors.router)
 
-@app.get("/")
-async def root():
-    return {"root": "hello world"}
-
-@app.get("/health")
-async def health_check():
-    return {"status": "running..."}
 
