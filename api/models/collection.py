@@ -18,7 +18,6 @@ class Collection(Base):
     
     statut: Mapped[str] = mapped_column(String(20), nullable=False)
     date: Mapped[date]
-    categorie: Mapped[str] = mapped_column(String(20), nullable=False)
     note: Mapped[float | None] = mapped_column(nullable=True)
     commentaire: Mapped[str | None] = mapped_column(nullable=True)
 

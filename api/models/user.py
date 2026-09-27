@@ -11,8 +11,6 @@ if TYPE_CHECKING:
 class Users(Base):
     __tablename__ = "users"
     id: Mapped[int] = mapped_column(primary_key=True)
-    username: Mapped[str] 
-    fullname: Mapped[str]
     password_hash: Mapped[str] 
     email: Mapped[str] = mapped_column(String(255), unique=True, nullable=False)
     disabled: Mapped[bool] = mapped_column(default=False, nullable=False)
