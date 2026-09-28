@@ -45,7 +45,7 @@ async def create_collectionEntry(user_id : int, item_id : int, statut : str | No
         await db.commit()
     except IntegrityError:
         await db.rollback()
-        raise Error("item deja dans la collection", status.HTTP_409_CONFLICT)
+        return 0
     return await find_collectionEntry_by_id(user_id, entry.id, db)
 
 

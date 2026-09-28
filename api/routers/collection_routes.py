@@ -24,10 +24,12 @@ async def list_collection(current_user: Annotated[User, Depends(get_current_acti
 
 
 @router.post("",summary="ajouter une entry de la collection", response_model=CollectionEntry, status_code=status.HTTP_201_CREATED)
-async def add_collection(current_user: Annotated[User, Depends(get_current_active_user)],item_id: int, entryElt : CollectionCreate, db: AsyncSession = Depends(get_db),):
+async def add_collection(current_user: Annotated[User, Depends(get_current_active_user)], entryElt : CollectionCreate, db: AsyncSession = Depends(get_db),):
     entry = await create_collectionEntry(current_user.id, entryElt.item_id, entryElt.statut, entryElt.note, entryElt.commentaire, db)
     if entry is None :
         raise Error("entry introuvable", status.HTTP_404_NOT_FOUND)
+    if entry == 0 :
+        raise Error("item deja dans la collection", status.HTTP_409_CONFLICT) 
     return entry
 
 @router.patch("/{entry_id}",summary="modifier une entry de la collection",response_model=CollectionEntry, status_code=status.HTTP_200_OK)
