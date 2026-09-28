@@ -5,8 +5,11 @@ from .models.collection import Collection
 from .routers import auth_routes, items_routes, collection_routes
 from .db.session import create_table, engine
 from .core.config import settings
+from .core.errors import Error,  exception_handler, validation_exception_handler
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.exceptions import RequestValidationError
 from contextlib import asynccontextmanager
+from typing import AsyncGenerator
 
 @asynccontextmanager
 async def lifespan(app : FastAPI):
@@ -16,8 +19,9 @@ async def lifespan(app : FastAPI):
     print("close")
     await engine.dispose()
 
-app = FastAPI(lifespan=lifespan)
-
+app = FastAPI(title="Collection Api",lifespan=lifespan)
+app.add_exception_handler(Error, exception_handler)
+app.add_exception_handler(RequestValidationError, validation_exception_handler)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.CORS_ORIGINS,
@@ -30,5 +34,5 @@ app.add_middleware(
 app.include_router(auth_routes.router)
 app.include_router(items_routes.router)
 app.include_router(collection_routes.router)
-
+app.include_router(collection_routes.stats_router)
 

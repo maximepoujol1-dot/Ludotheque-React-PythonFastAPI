@@ -44,3 +44,32 @@ CATALOGUE = [
 USERS = [
     
 ]
+
+import asyncio
+from sqlalchemy import select
+from .db.session import async_SessionLocal, create_table, engine
+from .models.collection import Collection  
+from .models.item import Items
+from .models.user import Users 
+
+async def seed():
+    await create_table()
+    async with async_SessionLocal() as db:
+        existants = set(await db.scalars(select(Items.titre)))
+        for titre, categorie, description, annee in CATALOGUE:
+            if titre in existants:
+                continue
+            db.add(Items(
+                titre=titre,
+                categorie=categorie,
+                description=description,
+                annee=annee,
+                studio="Inconnu",
+                directeur="Inconnu",
+                image_url="",
+            ))
+        await db.commit()
+    await engine.dispose()
+
+if __name__ == "__main__":
+    asyncio.run(seed())

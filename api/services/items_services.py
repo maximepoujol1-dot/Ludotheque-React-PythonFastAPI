@@ -19,7 +19,7 @@ async def get_all_item(db: AsyncSession,q: str | None = None, categorie: str | N
     total = total_result.scalar_one()
 
     pagination = (page - 1) * limit
-    statement = query.offset(pagination).limit(limit)
+    statement = query.order_by(Items.id).offset(pagination).limit(limit)
     result = await db.scalars(statement)
     return {
         "total": total or 0,

@@ -1,33 +1,30 @@
 from pydantic import BaseModel, Field
 from .items import Items
-from datetime import date
+from datetime import date as Date
 from typing import Literal
 
 Status = Literal["a_decouvrir", "en_cours", "termine"]
 Category = Literal["fps", "rpg", "rts", "gestion"]
 
 class CollectionEntry(BaseModel):
-    collection_id: int
+    id: int
     item: Items
     statut: Status
-    date: date
-    categorie: Category
-    note: float | None = None
+    date: Date  = Field(default_factory=Date.today)
+    note: int | None = None
     commentaire: str | None = None
 
     model_config = {"from_attributes": True}
 
 class CollectionUpdate(BaseModel):
-    statut: Status | None = None
-    note: float | None = None
-    commentaire: str | None = None
+    statut : Status | None = None
+    note : int | None = Field(default=None, ge=0, le=5)
+    commentaire : str | None = None
 
 class CollectionCreate(BaseModel):
-    user_id: int
     item_id: int
-    statut: Status
-    date: date = Field(default_factory=date.today)
-    note: float | None = None
+    statut: Status = "a_decouvrir"
+    note: int | None = Field(default=None, ge=0, le=5)
     commentaire: str | None = None
 
 class CollectionStats(BaseModel):

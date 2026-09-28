@@ -15,7 +15,7 @@ class TokenData(BaseModel):
 password_hash = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 DUMMY_HASH = password_hash.hash("dummypassword")
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login", auto_error=False)
 
 def get_password_hashed(password : str):
     return password_hash.hash(password)

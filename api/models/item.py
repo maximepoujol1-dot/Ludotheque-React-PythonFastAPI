@@ -9,11 +9,13 @@ if TYPE_CHECKING:
 class Items(Base):
     __tablename__ = "items"
 
-    item_id: Mapped[int] = mapped_column(primary_key=True, index=True)
+    id: Mapped[int] = mapped_column(primary_key=True, index=True)
     titre: Mapped[str] = mapped_column(String(255), unique=True, nullable=False)
     
     categorie: Mapped[str] = mapped_column(String(20), nullable=False)
     description: Mapped[str] 
+    studio : Mapped[str] 
+    directeur : Mapped[str] 
     image_url: Mapped[str] 
     annee: Mapped[int] 
      

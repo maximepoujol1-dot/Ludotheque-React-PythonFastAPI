@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, Asyn
 from sqlalchemy.orm import DeclarativeBase
 from ..core.config import settings
 
-engine = create_async_engine(settings.DATABASE_URL, echo=True)
+engine = create_async_engine(settings.DATABASE_URL, echo=False)
 async_SessionLocal = async_sessionmaker(bind=engine,expire_on_commit=False)
 
 class Base(DeclarativeBase):
@@ -20,6 +20,6 @@ async def get_db() -> AsyncGenerator[AsyncSession,None]:
     finally:
       await db.close()
 
-async def create_table():
+async def create_table() -> None:
   async with engine.begin() as connection:
     await connection.run_sync(Base.metadata.create_all)
