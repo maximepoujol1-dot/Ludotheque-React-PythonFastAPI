@@ -9,7 +9,7 @@ interface ButtonProps {
 
 const Button = ({title,style,action}:ButtonProps) => {
   return (
-    <button className={style} onClick={()=>action}>{title}</button>
+    <button className={style} onClick={action}>{title}</button>
   )
 }
 
