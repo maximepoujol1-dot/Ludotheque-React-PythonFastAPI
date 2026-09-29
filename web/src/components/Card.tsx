@@ -2,13 +2,14 @@ import React from 'react'
 
 interface CardProps {
   title: string
+    style: string
   children: React.ReactNode
 
 }
 
-const Card = ({title,children}:CardProps) => {
+const Card = ({title,style,children}:CardProps) => {
   return (
-    <div>
+    <div className={style}>
       <h1>{title}</h1>
       {children}
     </div>
