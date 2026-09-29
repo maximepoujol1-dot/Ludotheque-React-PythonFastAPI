@@ -21,15 +21,6 @@ const Navbar = () => {
         </div>
 
         <div>
-          <input
-            className="w-64 lg:w-80 px-4 py-2 rounded-full border border-gray-300 bg-gray-50 text-gray-700 placeholder-gray-400 transition focus:outline-none focus:bg-white focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
-            type="search"
-            required
-            placeholder="search a game"
-          />
-        </div>
-
-        <div>
           <ul className='flex items-center gap-8 text-[17px] font-medium'>
             <Link to="/collection"><li className={linkStyle}>My collection</li></Link>
             <Link to="/account"><li className={linkStyle}>account</li></Link>
