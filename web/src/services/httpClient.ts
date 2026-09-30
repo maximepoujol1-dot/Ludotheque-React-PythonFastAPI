@@ -1,0 +1,1 @@
+import type { Game } from './types/type'

@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
 import Card from './Card'
 import Button from './Button'
+import useToggle from '../hooks/toggle'
 
 const tabBase = "px-6 py-2 font-semibold transition-colors cursor-pointer border-b-2"
 const tabActive = "text-orange-500 border-orange-500"
 const tabInactive = "text-gray-500 border-transparent hover:text-orange-400"
 
 const Form = () => {
-  const [register, setRegister] = useState(false)
+  const [register, toggle] = useToggle(false);
 	return (
     <div className="flex min-h-screen flex-col md:flex-row items-center justify-center">
       
@@ -22,9 +22,8 @@ const Form = () => {
             <input className="input validator w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-2 transition focus:outline-none focus:bg-white focus:border-orange-500 focus:ring-2 focus:ring-orange-200" type="password" required placeholder="your password" />
             <button className="mt-6 w-full py-2 rounded-lg bg-orange-500 text-white font-semibold shadow-md transition hover:bg-orange-600 active:scale-95 cursor-pointer">submit</button>
             <div className="flex justify-center items-center gap-2 mt-8">
-            <Button title={'register'} style={`${tabBase} ${register ? tabActive : tabInactive}`} action={() =>setRegister(true)}/>
-            <div className="w-px h-6 bg-gray-300"></div>
-            <Button title={'login'} style={`${tabBase} ${!register ? tabActive : tabInactive}`} action={()=>setRegister(false)}/>
+            <Button title={register && 'login'} style={`${tabBase} ${register ? tabActive : tabInactive}`} action={toggle}/>
+            
         </div>
           </div>
         </Card>
@@ -37,10 +36,8 @@ const Form = () => {
               <input className="input validator w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-2 transition focus:outline-none focus:bg-white focus:border-orange-500 focus:ring-2 focus:ring-orange-200" type="password" required placeholder="your password" />
               <button className="mt-6 w-full py-2 rounded-lg bg-orange-500 text-white font-semibold shadow-md transition hover:bg-orange-600 active:scale-95 cursor-pointer">submit</button>
               <div className="flex justify-center items-center gap-2 mt-8">
-            <Button title={'register'} style={`${tabBase} ${register ? tabActive : tabInactive}`} action={() =>setRegister(true)}/>
-            <div className="w-px h-6 bg-gray-300"></div>
-            <Button title={'login'} style={`${tabBase} ${!register ? tabActive : tabInactive}`} action={()=>setRegister(false)}/>
-        </div>
+            <Button title={!register && 'register'} style={`${tabBase} ${register ? tabActive : tabInactive}`} action={toggle}/>
+            </div>
           </div>
         </Card>}
       </div>
