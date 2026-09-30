@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import CatalogueList from "../components/CatalogueList"
-import { getItems } from '../services'
+import { getItems } from '../services/itemService'
 
 const HomePage = () => {
   const [games, setGames] = useState([])

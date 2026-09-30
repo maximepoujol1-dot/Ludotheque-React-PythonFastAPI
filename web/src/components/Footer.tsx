@@ -2,11 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const titleStyle = 'text-white font-semibold uppercase tracking-wider text-sm mb-4'
-const linkStyle = 'hover:text-orange-400 transition-colors'
+const linkStyle = 'hover:text-green-400 transition-colors'
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-gray-400 w-full mt-auto border-t border-gray-800">
+    <footer className="bg-[#05541D] text-gray-300 w-full mt-auto border-t border-green-400">
       <div className="container mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-3 gap-8 text-sm">
         
         <div>
@@ -25,9 +25,9 @@ const Footer = () => {
           <h1 className={titleStyle}>Legals :</h1>
           <br/>
           <ul className='space-y-2'>
-            <li><Link to="/legal" className={linkStyle}>Conditions d'utilisation</Link></li>
-            <li><Link to="/legal" className={linkStyle}>confidentialité</Link></li>
-            <li><Link to="/legal" className={linkStyle}>Mentions légales</Link></li>
+            <li><Link to="/legal#condition" className={linkStyle}>Conditions d'utilisation</Link></li>
+            <li><Link to="/legal#confidentialité" className={linkStyle}>confidentialité</Link></li>
+            <li><Link to="/legal#mention" className={linkStyle}>Mentions légales</Link></li>
           </ul>
         </div>
 
