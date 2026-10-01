@@ -15,9 +15,9 @@ const CatalogueList = ({ results }: GameListResponse) => {
   }
 
   return (
-    <ul className="flex flex-wrap list-none p-0 m-0">
+    <ul className="m-0 grid list-none grid-cols-1 gap-6 p-0 sm:grid-cols-2 xl:grid-cols-3">
       {results.map((game) => (
-        <li key={game.id}>
+        <li key={game.id} className="min-w-0">
           <CatalogueCard game={game} />
         </li>
       ))}
