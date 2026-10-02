@@ -10,9 +10,12 @@ const CatalogueCard = ({ game }: Props) => {
   return (
     <Card
       title={game.titre}
-      style="flex h-full w-full flex-col overflow-hidden bg-white shadow-xl border border-gray-200 border-t-4 border-t-green-500 rounded-2xl dark:bg-dark-surface dark:border-white/10 [&>h1]:px-6 [&>h1]:pt-6 [&>h1]:text-xl [&>h1]:font-bold [&>h1]:text-gray-900 dark:[&>h1]:text-white"
+      style="relative flex h-full w-full flex-col overflow-hidden bg-white shadow-xl border border-gray-200 border-t-4 border-t-green-500 rounded-2xl dark:bg-dark-surface dark:border-white/10 [&>h1]:px-6 [&>h1]:pr-28 [&>h1]:pt-6 [&>h1]:text-xl [&>h1]:font-bold [&>h1]:text-gray-900 dark:[&>h1]:text-white"
     >
       <div className="flex flex-1 flex-col px-6 pb-6">
+        <span className="absolute right-6 top-5 z-10 w-fit rounded-full bg-green-50 px-3 py-1 text-sm font-semibold capitalize text-green-700 dark:bg-green-500/10 dark:text-green-400">
+          {game.categorie}
+        </span>
         {game.image_url && (
           <img
             src={game.image_url}
@@ -20,9 +23,7 @@ const CatalogueCard = ({ game }: Props) => {
             className="mb-5 aspect-[16/9] w-full rounded-lg object-cover"
           />
         )}
-        <span className="mb-4 w-fit rounded-full bg-green-50 px-3 py-1 text-sm font-semibold capitalize text-green-700 dark:bg-green-500/10 dark:text-green-400">
-          {game.categorie}
-        </span>
+
         <p className="mb-5 flex-1 leading-relaxed text-gray-600 dark:text-gray-300">
           {game.description || 'Aucune description disponible.'}
         </p>
