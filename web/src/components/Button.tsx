@@ -2,13 +2,14 @@ import React from 'react'
 
 interface ButtonProps {
   title: string
+  style: string
   action: ()=> void
 
 }
 
-const Button = ({title,action}:ButtonProps) => {
+const Button = ({title,style,action}:ButtonProps) => {
   return (
-    <button onClick={()=>action}>{title}</button>
+    <button className={style} onClick={action}>{title}</button>
   )
 }
 
