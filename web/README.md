@@ -17,16 +17,16 @@
 
 - From the project root, run:
 
-    - cd web
-    - npm install
-    - npm run dev
+        - cd web
+        - npm install
+        - npm run dev
 
 - The development server will then be started by Vite.
 
 - If you encounter issues with the npm command on Windows, try using npm.cmd instead:
 
-    - npm.cmd install 
-    - npm.cmd run dev
+        - npm.cmd install 
+        - npm.cmd run dev
 
 ## Demonstration :     
 

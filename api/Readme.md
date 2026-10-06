@@ -12,16 +12,16 @@
 
 - From the project root, run:
 
-    - py -m pip install -r api/requirements.txt
-    - cd api
-    - docker compose up -d
-    - cd..    
-    - py -m api.seed  
-    - py -m uvicorn api.main:app --reload 
+        - py -m pip install -r api/requirements.txt
+        - cd api
+        - docker compose up -d
+        - cd..    
+        - py -m api.seed  
+        - py -m uvicorn api.main:app --reload 
 
-    - cd web
-    - npm install
-    - npm run dev
+        - cd web
+        - npm install
+        - npm run dev
 
 - The backend will be started.  
 

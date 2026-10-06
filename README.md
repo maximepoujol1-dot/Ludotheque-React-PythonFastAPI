@@ -14,22 +14,22 @@
 
 - From the project root, install the API dependencies and start the database and API:
 
-```powershell
-py -m pip install -r api/requirements.txt
-Set-Location api
-docker compose up -d
-Set-Location ..
-py -m api.seed
-py -m uvicorn api.main:app --reload
-```
+
+        - py -m pip install -r api/requirements.txt
+        - cd api
+        - docker compose up -d
+        - cd ..
+        - py -m api.seed
+        - py -m uvicorn api.main:app --reload
+
 
 - In a second terminal, start the web application:
 
-```powershell
-Set-Location web
-npm install
-npm run dev
-```
+
+        - cd web
+        - npm install
+        - npm run dev
+
 
 - On Windows, use `npm.cmd` instead of `npm` if PowerShell prevents running npm scripts.
 - Open the API documentation at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
