@@ -7,13 +7,17 @@
 
 - It allows you to explore and test the different aspects of the frontend independently from the backend and its data.
 
-## Prerequisites:
+- You can navigate between pages using routing and use several features, such as the theme selector
+
+- You also have access to the legal section, which explains the legal details of the project.
+
+## Prerequisites :
 
 - The following software is required:
 
     - Node.js with npm
 
-## Installation and startup: 
+## Installation and startup : 
 
 - From the project root, run:
 
@@ -31,6 +35,10 @@
 ## Demonstration :     
 
 ![Capture du terminal](../user_documentation/screen/terminalWeb.png)
+
+- you can see now the homepage without data
+
+![Capture du terminal](../user_documentation/screen/webHomepage.png)
 
 ## Structure :
 
@@ -85,7 +93,7 @@
             ├── NotFoundPage.tsx
             └── RegisterPage.tsx
 
-## Contribution :
+## Contributor :
 
 - Thomas Davrou
 
@@ -95,6 +103,6 @@
 
 - This project is licensed under the MIT License.
 
-## Additional information:
+## Additional information :
 
 - this a student project developed within the context of a Ynov project

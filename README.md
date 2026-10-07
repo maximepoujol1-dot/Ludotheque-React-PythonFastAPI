@@ -2,15 +2,22 @@
 
 ## Description :
 
-- A full-stack board game collection application with a React and TypeScript frontend and a Python FastAPI backend.
+- Ludotheque-React-PythonFastAPI is a student project developed using Python FastAPI for the backend and React with TypeScript for the frontend.
 
-## Prerequisites:
+- This project is intended for people who want to keep track of their video games and add details to them, such as ratings and comments, as well as statistics about their collection. 
+
+- This goal is to develop collection application with a catalogue where users can pick games and add them to thier collection, rate them, and add comments.
+ 
+- All of this is managed through a user authentication system, allowing everyone to keep their own collection. 
+
+
+## Prerequisites :
 
 - Python and pip
 - Node.js with npm
 - Docker with Docker Compose
 
-## Installation and startup
+## Installation and quick start :
 
 - From the project root, install the API dependencies and start the database and API:
 
@@ -34,7 +41,7 @@
 - On Windows, use `npm.cmd` instead of `npm` if PowerShell prevents running npm scripts.
 - Open the API documentation at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
 
-## Demonstration
+## Demonstration :
 
 - In the first terminal : 
 
@@ -50,7 +57,9 @@
 
 - You can now launch the frontend and retrieve the data from the backend.
 
-## Structure
+![Capture du terminal](./user_documentation/screen/completeApp.png)
+
+## Structure :
 
     Ludotheque-React-PythonFastAPI/
     ├── README.md
@@ -160,16 +169,20 @@
                 └── RegisterPage.tsx
 
 
-## Contribution
+## Contributor :
 
 - Maxime Collette Poujol
 
 - Thomas Davrou
 
-## License
+## License :
 
 - This project is licensed under the MIT License.
 
-## Additional information
+## Additional information :
 
 - This is a student project developed as part of a Ynov project.
+
+- Micromaniac is the name of a previous project: a video game collection management application developed in Java using object-oriented programming (OOP).
+
+- Each part of the project can be run independently to perform tests or simply explore each part separately.
