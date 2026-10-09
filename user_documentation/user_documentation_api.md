@@ -1,19 +1,18 @@
-# API — User documentation
+# API - User documentation
 
 ## Solution overview
 
-Ludotheque is a video game collection management application. It allows a user to browse a catalog, add games to their personal collection, rate and comment each title, and track their collection statistics.
+Ludotheque is a video game collection management application. It allows users to browse a catalog, add games to their personal collection, rate and comment each title, and track collection statistics.
 
-It is designed for players and collectors who want to organize their game library in a simple and secure way. The application notably offers:
+It is designed for players and collectors who want to organize their library in a simple and secure way. The application includes:
 
-The Ludotheque API manages the different routes, such as Item, Auth, and Collection, through services that communicate with and update a database.
-It provides several features, including:
-
-- a game catalog with search and filtering by category;
+- a game catalog with search and category filtering;
 - user registration and authentication;
-- a private collection associated with each account;
-- updating the status, rating, and comment for a game;
-- global statistics on the collection.
+- a private collection linked to each account;
+- updates to a game's status, rating, and comment;
+- global statistics for the collection.
+
+The Ludotheque API manages the different routes, such as Items, Auth, and Collection, through services that interact with and update the database.
 
 ## Quick start
 
@@ -43,29 +42,29 @@ Follow these steps to launch the project and access the API:
 At first glance, you should see this:
 ![Swagger capture](../user_documentation/screen/apiSwagger.png)
 
-### items
+### Items
 
 1. View the Items section available in Swagger with the following routes:
 
 ![Swagger capture](../user_documentation/screen/apiItemsSwagger.png)
 ---
 
-2. The Collection routes allow:
+2. The item routes allow:
     - browsing the list of games;
-    - searching for a title, filtering by category, and viewing a game’s details.
+    - searching by title, filtering by category, and viewing a game's details.
 
 3. These routes are accessible directly without authorization.
 
-4. Each action includes parameters to fill in:
+4. Each request includes parameters to fill in:
     - text search (`q`);
     - category (`categorie`);
     - page number (`page`);
-    - number of items (`limit`);
-    - search by identifier using (`item_id`).
+    - number of items per page (`limit`);
+    - search by identifier (`item_id`).
 
-**Expected result:** the user gets the list of available games or the details of a specific game without being authenticated.
+**Expected result:** the user gets the list of available games or the details of a specific game without needing to authenticate.
 
-### auth
+### Auth
 
 1. View the Auth section available in Swagger with the following routes:
 
@@ -77,24 +76,24 @@ At first glance, you should see this:
     - logging in to receive a JWT token;
     - retrieving the current user.
 
-3. The Authentication section is accessible via the “Authorize” button in Swagger, which also unlocks access to the collection.
+3. The Authentication section is accessible via the "Authorize" button in Swagger, which also unlocks access to the collection.
 
 4. For each action, parameters must be provided:
     - email and password for registration and login;
-    - JWT token in the `Authorization` header for protected routes; `Authorization: Bearer <token>` pour les routes protégées ;
+    - JWT token in the Authorization header for protected routes, for example: Authorization: Bearer your_token_here;
     - entry identifier (`entry_id`) to modify or delete a collection item.
 
-**Résultat attendu :** l’utilisateur est authentifié et peut accéder aux routes protégées de sa collection personnelle.
+**Expected result:** the user is authenticated and can access the protected routes of their personal collection.
 
-### collection
+### Collection
 
 1. View the Collection section available in Swagger with the following routes:
 
 ![Swagger capture](../user_documentation/screen/apiCollectionSwagger.png)
 ---
 
-2. The Collection routes allow:
-    - retrieving the user’s collection;
+2. The collection routes allow:
+    - retrieving the user's collection;
     - adding a game to the collection;
     - modifying a collection entry (status, rating, comment);
     - deleting a game from the collection;
@@ -114,11 +113,10 @@ At first glance, you should see this:
 | Command | Description |
 |---|---|
 | `py -m pip install -r api/requirements.txt` | Install Python dependencies. |
-| `docker compose down -v` | Turn off the PostgreSQL database in Docker. |
+| `docker compose down -v` | Stop the PostgreSQL database in Docker. |
 | `docker compose up -d` | Start the PostgreSQL database in Docker. |
 | `py -m api.seed` | Populate the database with the game data. |
 | `py -m uvicorn api.main:app --reload` | Launch the API. |
-
 
 ## Prerequisites
 
@@ -130,7 +128,7 @@ At first glance, you should see this:
 
 ## Access and configuration
 
-1. Configuration: the `api/.env.example` file contains the variables to set. You must create a `.env` file with values adapted to the environment, notably:
+1. Configuration: the `api/.env.example` file contains the variables to set. You must create a `.env` file with values adapted to your environment, notably:
    - `SECRET_KEY`;
    - `ALGORITHM`;
    - `ACCESS_TOKEN_EXPIRE_MINUTES`;
