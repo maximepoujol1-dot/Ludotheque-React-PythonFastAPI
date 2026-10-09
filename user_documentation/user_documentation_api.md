@@ -1,25 +1,25 @@
-# API — Documentation utilisateur
+# API — User documentation
 
-## Présentation de la solution
+## Solution overview
 
-Ludothèque est une application de gestion de collection de jeux vidéo. Elle permet à un utilisateur de consulter un catalogue, d’ajouter des jeux à sa collection personnelle, de les noter et de commenter chaque titre, puis de suivre ses statistiques de collection.
+Ludotheque is a video game collection management application. It allows a user to browse a catalog, add games to their personal collection, rate and comment each title, and track their collection statistics.
 
-Elle s’adresse aux joueurs et collectionneurs souhaitant organiser leur ludothèque de manière simple et sécurisée. L’application propose notamment :
+It is designed for players and collectors who want to organize their game library in a simple and secure way. The application notably offers:
 
-L'API ludothèque gèrent les différentes routes comme Item, Auth ou collection au travers de servies qui commique et mettent a jour une base de donnée.
-Elle permet diverse fonctionnalité comme :
+The Ludotheque API manages the different routes, such as Item, Auth, and Collection, through services that communicate with and update a database.
+It provides several features, including:
 
-    - un catalogue de jeux avec recherche et filtrage par catégorie ;
-    - une inscription et une authentification utilisateur ;
-    - une collection privée associée à chaque compte ;
-    - la modification du statut, de la note et du commentaire d’un jeu ;
-    - des statistiques globales sur la collection.
+- a game catalog with search and filtering by category;
+- user registration and authentication;
+- a private collection associated with each account;
+- updating the status, rating, and comment for a game;
+- global statistics on the collection.
 
 ## Quick start
 
-Suivez ces étapes pour lancer le projet et accéder à l’API :
+Follow these steps to launch the project and access the API:
 
-1. Dans le terminal, à la racine du projet, exécutez les commandes suivantes :
+1. In the terminal, at the project root, run the following commands:
 
         py -m pip install -r api/requirements.txt
         cd api
@@ -28,113 +28,112 @@ Suivez ces étapes pour lancer le projet et accéder à l’API :
         py -m api.seed
         py -m uvicorn api.main:app --reload
 
-2. Ouvrez ensuite l’adresse de l’API dans le navigateur :
+2. Then open the API address in your browser:
 
         http://127.0.0.1:8000
 
-3. Ajoutez `/docs` à la fin de l’URL pour accéder à la documentation Swagger :
+3. Add `/docs` to the end of the URL to access the Swagger documentation:
 
         http://127.0.0.1:8000/docs
 
-**Résultat attendu :** vous accédez à la documentation Swagger de l’API et pouvez tester les routes de manière interactive.
+**Expected result:** you access the API Swagger documentation and can test the routes interactively.
 
-## Guide des fonctionnalités
+## Feature guide
 
-A premimière vu, vous devez voir ceci : 
-![Capture du swagger](../user_documentation/screen/apiSwagger.png)
+At first glance, you should see this:
+![Swagger capture](../user_documentation/screen/apiSwagger.png)
 
 ### items
 
-1. Voir la partie items disponible dans le Swagger avec les routes :
+1. View the Items section available in Swagger with the following routes:
 
-![Capture du swagger](../user_documentation/screen/apiItemsSwagger.png)
----     
+![Swagger capture](../user_documentation/screen/apiItemsSwagger.png)
+---
 
-2. Les routes de Collection permettent :
-    -  parcourir la liste des jeux
-    -  rechercher un titre, filtrer par catégorie et consulter le détail d’un jeu.
+2. The Collection routes allow:
+    - browsing the list of games;
+    - searching for a title, filtering by category, and viewing a game’s details.
 
-3. Les routes sont accessibles directement sans autorisation.
+3. These routes are accessible directly without authorization.
 
-4. Pour chaque action, il y a des paramètres à renseigner :
-    - recherche textuelle (`q`) ;
-    - catégorie (`categorie`) ;
-    - numéro de page (`page`) ;
-    - nombre d’éléments (`limit`) ;
-    - recherche par identifiant avec (`item_id`).
+4. Each action includes parameters to fill in:
+    - text search (`q`);
+    - category (`categorie`);
+    - page number (`page`);
+    - number of items (`limit`);
+    - search by identifier using (`item_id`).
 
-**Résultat attendu :** l’utilisateur obtient la liste des jeux disponibles ou le détail d’un jeu précis sans être authentifié.
+**Expected result:** the user gets the list of available games or the details of a specific game without being authenticated.
 
 ### auth
 
-1. Voir la partie auth disponible dans le Swagger avec les routes suivantes :
+1. View the Auth section available in Swagger with the following routes:
 
-![Capture du swagger](../user_documentation/screen/apiAuthSwagger.png)
+![Swagger capture](../user_documentation/screen/apiAuthSwagger.png)
 ---
 
-2. Les routes d’authentification permettent :
-    - de créer un compte avec une adresse e-mail et un mot de passe ;
-    - de se connecter pour recevoir un jeton JWT ;
-    - de récupérer l’utilisateur actuel.
+2. The authentication routes allow:
+    - creating an account with an email address and password;
+    - logging in to receive a JWT token;
+    - retrieving the current user.
 
-3. La partie Authentification est accessible via le bouton « Authorize » dans Swagger, ce qui débloque aussi l’accès à la collection.
+3. The Authentication section is accessible via the “Authorize” button in Swagger, which also unlocks access to the collection.
 
-4. Pour chaque action il y a des paramètres à renseigner :
-    - email et mot de passe pour l’inscription et la connexion ;
-    - token JWT dans l’en-tête `Authorization: Bearer <token>` pour les routes protégées ;
-    - identifiant d’entrée (`entry_id`) pour modifier ou supprimer un élément de la collection.
+4. For each action, parameters must be provided:
+    - email and password for registration and login;
+    - JWT token in the `Authorization` header for protected routes; `Authorization: Bearer <token>` pour les routes protégées ;
+    - entry identifier (`entry_id`) to modify or delete a collection item.
 
 **Résultat attendu :** l’utilisateur est authentifié et peut accéder aux routes protégées de sa collection personnelle.
 
 ### collection
 
-1. Voir la partie collection disponible dans Swagger avec les routes suivantes :
+1. View the Collection section available in Swagger with the following routes:
 
-![Capture du swagger](../user_documentation/screen/apiCollectionSwagger.png)
+![Swagger capture](../user_documentation/screen/apiCollectionSwagger.png)
 ---
 
-2. Les routes de Collection permettent :
-    - de récupérer la collection de l’utilisateur ;
-    - d’ajouter un jeu à la collection ;
-    - de modifier un élément de la collection (statut, note, commentaire) ;
-    - de supprimer un jeu de la collection ;
-    - de récupérer les statistiques de la collection.
+2. The Collection routes allow:
+    - retrieving the user’s collection;
+    - adding a game to the collection;
+    - modifying a collection entry (status, rating, comment);
+    - deleting a game from the collection;
+    - retrieving collection statistics.
 
-3. Pour avoir accès à cette partie, il faut d’abord passer par l’authentification. Les routes sont protégées et nécessitent un token valide.
+3. To access this section, the user must first authenticate. The routes are protected and require a valid token.
 
-4. Pour chaque action, des paramètres sont à renseigner (sauf pour la récupération de la collection et des statistiques) :
-    - pour ajouter un jeu, il faut remplir `item_id`, `statut`, `note` et `commentaire` ;
-    - pour modifier un jeu, il faut fournir l’`entry_id` et les champs à mettre à jour ;
-    - pour supprimer un jeu, il faut renseigner son `entry_id`.
+4. For each action, parameters must be provided (except when retrieving the collection and statistics):
+    - to add a game, fill in `item_id`, `status`, `rating`, and `comment`;
+    - to modify a game, provide the `entry_id` and the fields to update;
+    - to delete a game, provide its `entry_id`.
 
-**Résultat attendu :** l’utilisateur possède une collection personnelle consultable et modifiable, avec des statistiques calculées automatiquement à partir de ses entrées.
+**Expected result:** the user has a personal collection that can be consulted and modified, with statistics calculated automatically from their entries.
 
-## Liste des commandes
+## Command list
 
-| Commande | Description |
+| Command | Description |
 |---|---|
-| `py -m pip install -r api/requirements.txt` | Installe les dépendances Python du backend. | 
-| `cd api` | Se place dans le dossier backend. | 
-| `docker compose down -v` | Éteint la base PostgreSQL dans Docker. | 
-| `docker compose up -d` | Démarre la base PostgreSQL dans Docker. | 
-| `py -m api.seed` | Remplit la base avec les données de jeux. | 
-| `py -m uvicorn api.main:app --reload` | Lance l’API FastAPI en mode développement. | 
+| `py -m pip install -r api/requirements.txt` | Install Python dependencies. |
+| `docker compose down -v` | Turn off the PostgreSQL database in Docker. |
+| `docker compose up -d` | Start the PostgreSQL database in Docker. |
+| `py -m api.seed` | Populate the database with the game data. |
+| `py -m uvicorn api.main:app --reload` | Launch the API. |
 
 
-## Prérequis
+## Prerequisites
 
-- Python 3.12+ ou version compatible avec le projet ;
-- Node.js et npm ;
-- Docker Desktop ou Docker Engine ;
-- Un IDE comme VS Code ;
-- Un navigateur moderne pour accéder à l’application web et à Swagger.
+- Python 3.12+;
+- Node.js and npm;
+- Docker Desktop or Docker Engine;
+- an IDE such as VS Code;
+- a browser.
 
-## Accès et configuration
+## Access and configuration
 
-1. Configuration : le fichier `api/.env.example` contient les variables à renseigner. Il faut créer un fichier `.env` avec les valeurs adaptées à l’environnement, notamment :
-   - `SECRET_KEY` ;
-   - `ALGORITHM` ;
-   - `ACCESS_TOKEN_EXPIRE_MINUTES` ;
-   - `DATABASE_URL` ;
+1. Configuration: the `api/.env.example` file contains the variables to set. You must create a `.env` file with values adapted to the environment, notably:
+   - `SECRET_KEY`;
+   - `ALGORITHM`;
+   - `ACCESS_TOKEN_EXPIRE_MINUTES`;
+   - `DATABASE_URL`;
    - `CORS_ORIGINS`.
-2. Aide et dépannage : si le projet ne démarre pas, vérifiez que Docker est bien lancé, que les dépendances Python sont installées et que le fichier `.env` est correctement renseigné. Les fichiers `README.md` et la documentation Swagger permettent de confirmer le bon fonctionnement des routes.
+2. Help: if the project does not start, check that Docker is running, that the Python dependencies are installed, and that the `.env` file is correctly configured. The `README.md` files and the Swagger documentation help confirm that the routes are working properly.
