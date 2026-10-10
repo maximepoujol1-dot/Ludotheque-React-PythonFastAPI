@@ -4,6 +4,8 @@ import CatalogueList from "../components/CatalogueList"
 import { getItems } from '../services/itemService'
 
 const HomePage = () => {
+  const [name, setName] = useState<string | null>(null)
+  const [debouncedName, setDebouncedName] = useState(name)
   const [games, setGames] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -11,11 +13,21 @@ const HomePage = () => {
   const [filter, setFilter] = useState<string | null>(null);
   const [total, setTotal] = useState(0)
   const limit = 12
-
   
+  const totalReset = () => {
+    setFilter(null)
+    setName(null)
+  }
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {setDebouncedName(name)}, 400)
+    return () => window.clearTimeout(timer)
+  }, [name])
+
+
   useEffect(() => {
     setLoading(true)
-    getItems(page,filter)
+    getItems(debouncedName, page,filter)
       .then(data => {
         setGames(data.results || data)
         setTotal(data.total || 0)
@@ -25,7 +37,7 @@ const HomePage = () => {
         setError("Impossible de charger les jeux")
         setLoading(false)
       })
-  }, [page,filter])
+  }, [debouncedName,page,filter])
 
   if (loading) {
     return <div className="p-8">Chargement en cours...</div>
@@ -41,11 +53,12 @@ const HomePage = () => {
     <div className="p-8">
 
       <div className='gap-4'> 
+          <input type="text" value={name ?? ''} onChange={(e) => {setName(e.target.value || null)}} placeholder="search"/>
           <button className="bg-green-500 text-white font-bold py-2 px-4 rounded disabled:bg-gray-300" onClick={()=>setFilter("fps")}> FPS </button>
           <button className="bg-green-500 text-white font-bold py-2 px-4 rounded disabled:bg-gray-300" onClick={()=>setFilter("rpg")}> RPG </button>
           <button className="bg-green-500 text-white font-bold py-2 px-4 rounded disabled:bg-gray-300" onClick={()=>setFilter("rts")}> RTS </button>
           <button className="bg-green-500 text-white font-bold py-2 px-4 rounded disabled:bg-gray-300" onClick={()=>setFilter("gestion")}> GESTION</button>
-          <button className="bg-green-500 text-white font-bold py-2 px-4 rounded disabled:bg-gray-300" onClick={()=>setFilter(null)}> RESET</button>
+          <button className="bg-green-500 text-white font-bold py-2 px-4 rounded disabled:bg-gray-300" onClick={()=>totalReset()}> RESET</button>
       </div>
       <br/>
       <CatalogueList total={total} page={page} limit={limit} results={games} />
