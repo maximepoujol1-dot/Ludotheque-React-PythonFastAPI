@@ -41,10 +41,7 @@ const CatalogueCard = ({ game }: Props) => {
             <dd className="mt-1 text-gray-900 dark:text-white">{game.directeur}</dd>
           </div>
         </dl>
-        <button
-          className="mt-auto w-full cursor-pointer rounded-lg bg-green-500 px-4 py-2 font-semibold text-white shadow-md transition hover:bg-green-600 active:scale-[0.98]"
-          onClick={() => alert("Tu as cliqué sur le jeu numéro " + game.id)}
-        >
+        <button className="mt-auto w-full cursor-pointer rounded-lg bg-green-500 px-4 py-2 font-semibold text-white shadow-md transition hover:bg-green-600 active:scale-[0.98]" onClick={() => alert("Tu as cliqué sur le jeu numéro " + game.id)}>
           Ajouter à ma collection
         </button>
       </div>

@@ -12,6 +12,7 @@ const HomePage = () => {
   const [total, setTotal] = useState(0)
   const limit = 12
 
+  
   useEffect(() => {
     setLoading(true)
     getItems(page,filter)
