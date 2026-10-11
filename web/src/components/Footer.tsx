@@ -14,9 +14,10 @@ const Footer = () => {
           <h1 className={titleStyle}>Navigation :</h1>
           <br/>
           <ul className='space-y-2'>
-            <li><Link to="/" className={linkStyle}>Home</Link></li>
+            <li><Link to="/" className={linkStyle}>Homepage</Link></li>
             <li><Link to="/collection" className={linkStyle}>Collection</Link></li>
             <li><Link to="/account" className={linkStyle} >Account</Link></li>
+            <Link to="/stat"><li className={linkStyle}>Stats</li></Link>
           </ul>
         </div>
 
@@ -25,9 +26,9 @@ const Footer = () => {
           <h1 className={titleStyle}>Legals :</h1>
           <br/>
           <ul className='space-y-2'>
-            <li><Link to="/legal#condition" className={linkStyle}>Conditions d'utilisation</Link></li>
-            <li><Link to="/legal#confidentialité" className={linkStyle}>confidentialité</Link></li>
-            <li><Link to="/legal#mention" className={linkStyle}>Mentions légales</Link></li>
+            <li><Link to="/legal#condition" className={linkStyle}>Terms of Use</Link></li>
+            <li><Link to="/legal#confidentialité" className={linkStyle}>Privacy Policy</Link></li>
+            <li><Link to="/legal#mentions" className={linkStyle}>Legal Notice</Link></li>
           </ul>
         </div>
 
@@ -37,7 +38,7 @@ const Footer = () => {
           <br/>
           <ul className='space-y-2'>
             <li><a href="https://github.com/maximepoujol1-dot/Ludotheque-React-PythonFastAPI" className={linkStyle}>Repository</a></li>
-            <li><a href="https://github.com/Huldraine/Micromaniac" className={linkStyle}>premier Micromaniac</a></li>
+            <li><a href="https://github.com/Huldraine/Micromaniac" className={linkStyle}>First Micromaniac</a></li>
             <li><a href="https://github.com/maximepoujol1-dot" className={linkStyle}>Github maxime</a></li>
             <li><a href="https://github.com/poketoto45" className={linkStyle}>Github Thomas</a></li>
           </ul>

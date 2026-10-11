@@ -10,28 +10,31 @@ import LegalPage from "./view/LegalPage"
 import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
 import RegisterPage from "./view/RegisterPage"
+import StatPage from './view/statPage';
+
+import { AuthProvider } from './contexts/AuthContext';
+import { CollectionProvider } from './contexts/collectionContext';
 
 function App() {
-    
-
   return (
-    <>
-    
-      <Navbar/>
-      <div className="min-h-screen bg-white text-gray-900 dark:bg-dark dark:text-gray-100">  
-        <Routes>
-          <Route path="/" element={<HomePage/>}/>
-          <Route path="/collection" element={<CollectionPage/>}/>
-          <Route path="/account" element={<AccountPage/>}/>
-          <Route path="/login" element={<LoginPage/>}/>
-          <Route path="/register" element={<RegisterPage/>}/>
-          <Route path="/legal" element={<LegalPage/>}/>
-          <Route path="*" element={<NotFoundPage/>}/>
-        </Routes>
-      </div>
-
-      <Footer/>
-      </>
+    <AuthProvider>
+      <CollectionProvider>
+        <Navbar/>
+        <div className="min-h-screen bg-white text-gray-900 dark:bg-dark dark:text-gray-100">
+          <Routes>
+            <Route path="/" element={<HomePage/>}/>
+            <Route path="/collection" element={<CollectionPage/>}/>
+            <Route path="/stat" element={<StatPage/>}/>
+            <Route path="/account" element={<AccountPage/>}/>
+            <Route path="/login" element={<LoginPage/>}/>
+            <Route path="/register" element={<RegisterPage/>}/>
+            <Route path="/legal" element={<LegalPage/>}/>
+            <Route path="*" element={<NotFoundPage/>}/>
+          </Routes>
+        </div>
+        <Footer/>
+      </CollectionProvider>
+    </AuthProvider>
   )
 }
 
