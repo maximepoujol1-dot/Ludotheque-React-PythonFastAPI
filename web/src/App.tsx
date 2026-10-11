@@ -10,6 +10,7 @@ import LegalPage from "./view/LegalPage"
 import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
 import RegisterPage from "./view/RegisterPage"
+import StatPage from './view/statPage';
 
 function App() {
     
@@ -22,6 +23,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage/>}/>
           <Route path="/collection" element={<CollectionPage/>}/>
+          <Route path="/stat" element={<StatPage/>}/>
           <Route path="/account" element={<AccountPage/>}/>
           <Route path="/login" element={<LoginPage/>}/>
           <Route path="/register" element={<RegisterPage/>}/>
