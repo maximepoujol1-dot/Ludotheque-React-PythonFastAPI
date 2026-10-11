@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import Card from '../components/Card';
 import { useAuth } from '../contexts/AuthContext';
-import { loginUser } from '../services/authService';
+import { getCurrentUser, loginUser } from '../services/authService';
 
 const tabBase = "px-6 py-2 font-semibold transition-colors cursor-pointer border-b-2"
 const cardStyle = "flex flex-col w-full max-w-sm p-8 card bg-white dark:bg-dark-surface shadow-xl border border-gray-200 dark:border-white/10 border-t-4 border-t-green-500 rounded-2xl"
@@ -11,7 +11,7 @@ const inputStyle = "input validator w-full bg-gray-50 dark:bg-white/5 text-gray-
 const buttonStyle = "mt-6 w-full py-2 rounded-lg bg-green-500 text-white font-semibold shadow-md transition hover:bg-green-600 active:scale-95 cursor-pointer"
 
 const LoginPage = () => {
-  const { login, isAuthenticated } = useAuth();
+  const { login, setCurrentUser, isAuthenticated } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -31,7 +31,9 @@ const LoginPage = () => {
       const token = data.access_token || data.token || data.accessToken;
 
       if (token) {
+        const user = await getCurrentUser(token);
         login(token);
+        setCurrentUser(user);
       } else {
         setError('Token manquant dans la réponse du serveur');
       }
