@@ -17,11 +17,13 @@ const CatalogueCard = ({ game }: Props) => {
           {game.categorie}
         </span>
         {game.image_url && (
-          <img
-            src={game.image_url}
-            alt={`Illustration de ${game.titre}`}
-            className="mb-5 aspect-[16/9] w-full rounded-lg object-cover"
-          />
+          <div className="relative mb-5 aspect-[16/9] w-full shrink-0 overflow-hidden rounded-lg bg-gray-100 dark:bg-white/5">
+            <img
+              src={game.image_url}
+              alt={`Illustration de ${game.titre}`}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          </div>
         )}
 
         <p className="mb-5 flex-1 leading-relaxed text-gray-600 dark:text-gray-300">
@@ -29,7 +31,7 @@ const CatalogueCard = ({ game }: Props) => {
         </p>
         <dl className="mb-6 grid grid-cols-2 gap-x-4 gap-y-3 border-t border-gray-200 pt-4 text-sm dark:border-white/10">
           <div>
-            <dt className="font-medium text-gray-500 dark:text-gray-400">Année</dt>
+            <dt className="font-medium text-gray-500 dark:text-gray-400">year</dt>
             <dd className="mt-1 text-gray-900 dark:text-white">{game.annee}</dd>
           </div>
           <div>
@@ -37,7 +39,7 @@ const CatalogueCard = ({ game }: Props) => {
             <dd className="mt-1 text-gray-900 dark:text-white">{game.studio}</dd>
           </div>
           <div className="col-span-2">
-            <dt className="font-medium text-gray-500 dark:text-gray-400">Direction</dt>
+            <dt className="font-medium text-gray-500 dark:text-gray-400">Director</dt>
             <dd className="mt-1 text-gray-900 dark:text-white">{game.directeur}</dd>
           </div>
         </dl>

@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import CatalogueList from "../components/CatalogueList"
 import { getItems } from '../services/itemService'
+import Card from '../components/Card'
 
 const HomePage = () => {
   const [name, setName] = useState<string | null>(null)
@@ -52,14 +53,23 @@ const HomePage = () => {
   return (
     <div className="p-8">
 
-      <div className='gap-4'> 
-          <input type="text" value={name ?? ''} onChange={(e) => {setName(e.target.value || null)}} placeholder="search"/>
-          <button className="bg-green-500 text-white font-bold py-2 px-4 rounded disabled:bg-gray-300" onClick={()=>setFilter("fps")}> FPS </button>
-          <button className="bg-green-500 text-white font-bold py-2 px-4 rounded disabled:bg-gray-300" onClick={()=>setFilter("rpg")}> RPG </button>
-          <button className="bg-green-500 text-white font-bold py-2 px-4 rounded disabled:bg-gray-300" onClick={()=>setFilter("rts")}> RTS </button>
-          <button className="bg-green-500 text-white font-bold py-2 px-4 rounded disabled:bg-gray-300" onClick={()=>setFilter("gestion")}> GESTION</button>
-          <button className="bg-green-500 text-white font-bold py-2 px-4 rounded disabled:bg-gray-300" onClick={()=>totalReset()}> RESET</button>
-      </div>
+      <Card title={""} style={'flex flex-row flex-wrap items-center gap-3 w-full max-w-none p-5 sm:p-6 card bg-white dark:bg-dark-surface shadow-xl border border-gray-200 dark:border-white/10 border-t-4 border-t-green-500 rounded-2xl'} > 
+          <input id="game-search"
+          className="w-auto min-w-[200px] flex-1 rounded-xl border border-gray-300 bg-gray-50 px-4 py-3 text-gray-900 placeholder:text-gray-400 transition focus:border-green-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-200 dark:border-white/10 dark:bg-white/5 dark:text-white dark:placeholder:text-gray-500 dark:focus:bg-white/10 dark:focus:ring-green-500/30 sm:max-w-md"
+          type="search"
+          value={name ?? ''}
+          onChange={(e) => {setName(e.target.value || null)
+            setPage(1)
+          }}
+          placeholder="Search games..."
+        />
+          <button className="bg-green-500 text-white font-bold py-2 px-4 rounded disabled:bg-gray-300 transition hover:bg-green-600" onClick={()=>setFilter("fps")}> FPS </button>
+          <button className="bg-green-500 text-white font-bold py-2 px-4 rounded disabled:bg-gray-300 transition hover:bg-green-600" onClick={()=>setFilter("rpg")}> RPG </button>
+          <button className="bg-green-500 text-white font-bold py-2 px-4 rounded disabled:bg-gray-300 transition hover:bg-green-600" onClick={()=>setFilter("rts")}> RTS </button>
+          <button className="bg-green-500 text-white font-bold py-2 px-4 rounded disabled:bg-gray-300 transition hover:bg-green-600" onClick={()=>setFilter("gestion")}> GESTION</button>
+          <button className="bg-green-500 text-white font-bold py-2 px-4 rounded disabled:bg-gray-300 transition hover:bg-green-600" onClick={()=>totalReset()}> RESET</button>
+        </Card>
+          
       <br/>
       <CatalogueList total={total} page={page} limit={limit} results={games} />
 
