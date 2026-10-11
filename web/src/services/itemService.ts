@@ -8,6 +8,6 @@ export const getItems = async (q: string | null, page: number, categorie: string
   } else if (categorie){
     return await requete(`/items?page=${page}&categorie=${categorie}`)
   }
-  
+
   return await requete(`/items?page=${page}`)
 }

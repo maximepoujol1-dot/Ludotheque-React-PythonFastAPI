@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import Card from '../components/Card';
 import { useAuth } from '../contexts/AuthContext';
+import { loginUser } from '../services/authService';
 
 const tabBase = "px-6 py-2 font-semibold transition-colors cursor-pointer border-b-2"
 const cardStyle = "flex flex-col w-full max-w-sm p-8 card bg-white dark:bg-dark-surface shadow-xl border border-gray-200 dark:border-white/10 border-t-4 border-t-green-500 rounded-2xl"
@@ -20,40 +21,25 @@ const LoginPage = () => {
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-      e.preventDefault();
-      setError('');
+    e.preventDefault();
+    setError('');
 
-      try {
-        // FastAPI / OAuth2PasswordRequestForm attend du x-www-form-urlencoded avec "username" et "password"
-        const formData = new URLSearchParams();
-        formData.append('username', email);
-        formData.append('password', password);
+    try {
+      const data = await loginUser(email, password);
+      console.log("Données JSON reçues du serveur :", data);
 
-        const response = await fetch("http://localhost:8000/auth/login", {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: formData.toString()
-        });
+      const token = data.access_token || data.token || data.accessToken;
 
-        const data = await response.json();
-        console.log("Données JSON reçues du serveur :", data);
-
-        if (!response.ok) {
-          throw new Error(data?.detail || data?.message || "Erreur d'authentification");
-        }
-
-        const token = data.access_token || data.token || data.accessToken;
-
-        if (token) {
-          login(token);
-        } else {
-          setError('Token manquant dans la réponse du serveur');
-        }
-      } catch (err: any) {
-        console.error("Erreur attrapée :", err);
-        setError(err.message || 'Identifiants incorrects');
+      if (token) {
+        login(token);
+      } else {
+        setError('Token manquant dans la réponse du serveur');
       }
-    };
+    } catch (err: any) {
+      console.error("Erreur attrapée :", err);
+      setError(err.message || 'Identifiants incorrects');
+    }
+  };
 
   return (
     <div className="flex min-h-screen flex-col md:flex-row items-center justify-center">
