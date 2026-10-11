@@ -48,8 +48,8 @@ const AccountPage = () => {
       </Card>
       <br/>
       <Card title={'Action :'} style={'flex flex-row flex-wrap items-center gap-3 w-full max-w-none p-5 sm:p-6 card bg-white dark:bg-dark-surface shadow-xl border border-gray-200 dark:border-white/10 border-t-4 border-t-green-500 rounded-2xl'} >
-        <button onClick={handleLogout} className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition cursor-pointer"> see catalogue </button>
-        <button onClick={handleLogout} className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition cursor-pointer"> see my collection </button>
+        <button onClick={() => navigate('/')} className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition cursor-pointer"> see catalogue </button>
+        <button onClick={() => navigate('/collection')} className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition cursor-pointer"> see my collection </button>
         <button onClick={handleLogout} className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition cursor-pointer"> Logout </button>
       </Card>      
     </div>
