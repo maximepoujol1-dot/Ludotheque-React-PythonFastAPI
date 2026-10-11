@@ -19,7 +19,6 @@ export const addGameToCollection = async (gameId: number) => {
 
 export const addGameToGroup = addGameToCollection;
 
-// Mise à jour d'une entrée (statut, note, commentaire)
 export const updateCollectionEntry = async (entryId: number, data: { statut?: string, note?: number | null, commentaire?: string | null }) => {
   return await requete(`/me/collection/${entryId}`, {
     method: 'PATCH',
@@ -28,4 +27,8 @@ export const updateCollectionEntry = async (entryId: number, data: { statut?: st
     },
     body: JSON.stringify(data)
   });
+};
+
+export const getCollectionStats = async () => {
+  return await requete('/me/collection/stats');
 };

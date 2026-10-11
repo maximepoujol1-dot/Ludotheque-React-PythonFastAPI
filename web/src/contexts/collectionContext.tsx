@@ -1,11 +1,23 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-export type Status = 'a_faire' | 'en_cours' | 'termine' | 'abandonne';
+export type Status = 'a_decouvrir' | 'a_faire' | 'en_cours' | 'termine' | 'abandonne';
+
+export interface Item {
+  id: number;
+  titre: string;
+  categorie: string;
+  description: string;
+  image_url: string;
+  annee: number;
+  studio: string;
+  directeur: string;
+}
 
 export interface CollectionEntry {
   id: number;
-  item_id: number;
+  item: Item;
   statut: Status;
+  date: string;
   note?: number;
   commentaire?: string;
 }
