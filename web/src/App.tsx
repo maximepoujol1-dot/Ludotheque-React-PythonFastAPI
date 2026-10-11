@@ -12,14 +12,14 @@ import Footer from "./components/Footer"
 import RegisterPage from "./view/RegisterPage"
 import StatPage from './view/statPage';
 
-function App() {
-    
+// Ajout du contexte d'authentification
+import { AuthProvider } from './contexts/AuthContext';
 
+function App() {
   return (
-    <>
-    
+    <AuthProvider>
       <Navbar/>
-      <div className="min-h-screen bg-white text-gray-900 dark:bg-dark dark:text-gray-100">  
+      <div className="min-h-screen bg-white text-gray-900 dark:bg-dark dark:text-gray-100">
         <Routes>
           <Route path="/" element={<HomePage/>}/>
           <Route path="/collection" element={<CollectionPage/>}/>
@@ -31,9 +31,8 @@ function App() {
           <Route path="*" element={<NotFoundPage/>}/>
         </Routes>
       </div>
-
       <Footer/>
-      </>
+    </AuthProvider>
   )
 }
 

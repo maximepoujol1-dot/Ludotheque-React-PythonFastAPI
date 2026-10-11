@@ -1,17 +1,40 @@
-import { Navigate } from 'react-router-dom';
+import React from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
-export default function AccountPage() {
-  const token = localStorage.getItem('access_token');
+const AccountPage = () => {
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
 
-  if (!token) {
+  // Redirection si non connecté (comme demandé dans le contrat)
+  if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
 
+  const handleLogout = () => {
+    // Suppression du token du localStorage
+    localStorage.removeItem('access_token');
+    // Force la redirection vers la page de login
+    navigate('/login', { replace: true });
+    // Optionnel : un petit rechargement de page pour réinitialiser complètement l'état de l'app
+    window.location.reload();
+  };
+
   return (
-    <div>
-      <h1>Mon Compte</h1>
-      {/* futur contenu utilisateur */}
-      <p>Bienvenue ! Si tu vois ça, c'est que tu as un token.</p>
+    <div className="p-8">
+      <h1 className="text-3xl font-bold mb-4">Mon Compte</h1>
+      <p className="mb-6 text-gray-600 dark:text-gray-300">
+        Vous êtes connecté. Vous pouvez gérer votre session ici.
+      </p>
+
+      <button
+        onClick={handleLogout}
+        className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition cursor-pointer"
+      >
+        Se déconnecter (Drop token)
+      </button>
     </div>
   );
-}
+};
+
+export default AccountPage;
